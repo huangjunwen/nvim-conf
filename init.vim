@@ -11,6 +11,9 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 " set <Leader>
 let mapleader = ' '
 
+""""""""""""""""""""""""""
+" Plug start 
+""""""""""""""""""""""""""
 " Minimalist Vim Plugin Manager
 call plug#begin('~/.config/nvim/plugged')
 
@@ -20,12 +23,47 @@ call plug#begin('~/.config/nvim/plugged')
 " Little less sensible yet great vim defaults
 Plug 'sheerun/vimrc'
 
-
 """"""""""""""""""""""""""
 " UI
 """"""""""""""""""""""""""
 " A light and configurable statusline/tabline plugin for Vim
 Plug 'itchyny/lightline.vim'
+
+" The fancy start screen for Vim
+Plug 'mhinz/vim-startify'
+
+""""""""""""""""""""""""""
+" Edit
+""""""""""""""""""""""""""
+" Vim plugin, insert or delete brackets, parens, quotes in pair
+Plug 'jiangmiao/auto-pairs'
+
+""""""""""""""""""""""""""
+" Language 
+""""""""""""""""""""""""""
+" A solid language pack for Vim
+Plug 'sheerun/vim-polyglot'
+
+" Language Server Protocol (LSP) support for vim and neovim
+Plug 'autozimu/LanguageClient-neovim', {
+      \ 'branch': 'next',
+      \ 'do': 'bash install.sh',
+      \ }
+
+" Slim, Fast and Hackable Completion Framework for Neovim (depends on nvim-yarp)
+Plug 'ncm2/ncm2'
+
+" Yet Another Remote Plugin Framework for Neovim
+Plug 'roxma/nvim-yarp'
+
+""""""""""""""""""""""""""
+" Plug end
+""""""""""""""""""""""""""
+call plug#end()
+
+""""""""""""""""""""""""""
+" lightline configure
+""""""""""""""""""""""""""
 let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ }
@@ -38,25 +76,43 @@ let g:lightline.subseparator = {
       \ 'right': '',
       \ }
 
-" The fancy start screen for Vim
-Plug 'mhinz/vim-startify'
+""""""""""""""""""""""""""""""""""
+" LanguageClient-neovim configure
+""""""""""""""""""""""""""""""""""
+" Add language servers
+let g:LanguageClient_serverCommands = {
+      \ 'go': ['go-langserver', '-format-tool', 'gofmt', '-gocodecompletion'],
+      \ }
 
 """"""""""""""""""""""""""
-" Edit
+" ncm2 configure
 """"""""""""""""""""""""""
-" Vim plugin, insert or delete brackets, parens, quotes in pair
-Plug 'jiangmiao/auto-pairs'
+" Enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
 
+" IMPORTANTE: :help Ncm2PopupOpen for more information
+set completeopt=noinsert,menuone,noselect
+
+" suppress the annoying 'match x of y', 'The only match' and 'Pattern not found' messages
+set shortmess+=c
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <c-c> <ESC>
+
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
+
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+"let g:ncm2#popup_delay = 0
 
 """"""""""""""""""""""""""
-" Language 
+" theme
 """"""""""""""""""""""""""
-" A solid language pack for Vim
-Plug 'sheerun/vim-polyglot'
-
-call plug#end()
-
-
 " sheerun/vimrc includes this
 colorscheme wombat256mod
 
