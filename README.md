@@ -1,7 +1,7 @@
 
 # 依赖
 
-## neovim
+## neovim 以及 python3 支持
 
 mac:
 
