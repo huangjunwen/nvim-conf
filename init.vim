@@ -79,10 +79,8 @@ let g:lightline.subseparator = {
 """"""""""""""""""""""""""""""""""
 " LanguageClient-neovim configure
 """"""""""""""""""""""""""""""""""
-" Add language servers
-let g:LanguageClient_serverCommands = {
-      \ 'go': ['go-langserver', '-format-tool', 'gofmt', '-gocodecompletion'],
-      \ }
+" Init language servers
+let g:LanguageClient_serverCommands = {}
 
 """"""""""""""""""""""""""
 " ncm2 configure
@@ -108,11 +106,14 @@ inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-"let g:ncm2#popup_delay = 0
-
 """"""""""""""""""""""""""
-" theme
+" Theme
 """"""""""""""""""""""""""
 " sheerun/vimrc includes this
 colorscheme wombat256mod
 
+""""""""""""""""""""""""""
+" Golang
+""""""""""""""""""""""""""
+" Add golang server
+let g:LanguageClient_serverCommands.go = ['go-langserver', '-format-tool', 'gofmt', '-gocodecompletion']
