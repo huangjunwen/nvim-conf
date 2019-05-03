@@ -121,6 +121,7 @@ colorscheme wombat256mod
 " Golang
 """"""""""""""""""""""""""
 " Add golang server
-let g:LanguageClient_serverCommands.go = ['go-langserver', '-format-tool', 'gofmt', '-gocodecompletion']
+"let g:LanguageClient_serverCommands.go = ['go-langserver', '-format-tool', 'gofmt', '-gocodecompletion']
+let g:LanguageClient_serverCommands.go = ['bingo', '-format-tool', 'gofmt', '-gocodecompletion', '-freeosmemory', '10']
 " https://github.com/autozimu/LanguageClient-neovim/pull/706
 au BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
