@@ -57,6 +57,13 @@ Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
 
 """"""""""""""""""""""""""
+" GPG
+""""""""""""""""""""""""""
+
+" This script implements transparent editing of gpg encrypted files.
+Plug 'jamessan/vim-gnupg'
+
+""""""""""""""""""""""""""
 " Plug end
 """"""""""""""""""""""""""
 call plug#end()
