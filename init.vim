@@ -82,6 +82,11 @@ let g:lightline.subseparator = {
 " Init language servers
 let g:LanguageClient_serverCommands = {}
 
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> <c-]> :call jumpstack#Push()<CR>:call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <c-t> :call jumpstack#Pop()<CR>
+
 """"""""""""""""""""""""""
 " ncm2 configure
 """"""""""""""""""""""""""
@@ -117,3 +122,5 @@ colorscheme wombat256mod
 """"""""""""""""""""""""""
 " Add golang server
 let g:LanguageClient_serverCommands.go = ['go-langserver', '-format-tool', 'gofmt', '-gocodecompletion']
+" https://github.com/autozimu/LanguageClient-neovim/pull/706
+au BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
